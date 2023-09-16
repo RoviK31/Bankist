@@ -78,6 +78,20 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const createUsername = function (accs) {
+  accs.forEach(function(acc){
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(name => name[0])
+    .join('');
+  })
+
+};
+
+
+createUsername(accounts)
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -118,36 +132,44 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(arr.slice(-1)[0]);
 // console.log(arr.at(-1));
 
-//Coding challenge 1
-const julia1 = [3, 5, 2, 12, 7];
-const kate1 = [4, 1, 15, 8, 3];
+// //Coding challenge 1
+// const julia1 = [3, 5, 2, 12, 7];
+// const kate1 = [4, 1, 15, 8, 3];
 
-const julia2 = [9, 16, 6, 8, 3];
-const kate2 = [10, 5, 6, 1, 4];
-//1.
-const juliaCorrect = julia1.slice().splice(1,3)
-console.log(juliaCorrect);
-//2. 
-const allData = juliaCorrect.concat(kate1)
-console.log(allData);
+// const julia2 = [9, 16, 6, 8, 3];
+// const kate2 = [10, 5, 6, 1, 4];
+// //1.
+// const juliaCorrect = julia1.slice().splice(1,3)
+// console.log(juliaCorrect);
+// //2.
+// const allData = juliaCorrect.concat(kate1)
+// console.log(allData);
 
-//3.
-allData.forEach((data,i)=>{
-  if(data >= 3){
-    console.log(`Dog number ${i+1} is an adult, and is ${data} years old`);
-  }else{
-    console.log(`Dog number ${i+1} is still a puppy `);
-  }
+// //3.
+// allData.forEach((data,i)=>{
+//   if(data >= 3){
+//     console.log(`Dog number ${i+1} is an adult, and is ${data} years old`);
+//   }else{
+//     console.log(`Dog number ${i+1} is still a puppy `);
+//   }
 
+// })
+// //4
+// juliaCorrect.forEach(data=>{
+//   console.log("julia",data);
+// })
 
+// kate2.forEach(data=>{
+//   console.log("kate0",data);
+// })
+// const eurToUsd = 1.1
+// const movementsUSD = movements.map((mov) => mov * eurToUsd)
+// console.log(movements);
+// console.log(movementsUSD);
 
-
-})
-//4
-juliaCorrect.forEach(data=>{
-  console.log("julia",data);
-})
-
-kate2.forEach(data=>{
-  console.log("kate0",data);
-})
+// const movementsDescriptions = movements.map((mov,i,arr)=>
+//   `Movement ${i+1}: You ${mov > 0?'deposited':'withdrew'}${Math.abs(mov)}`
+// )
+// movementsDescriptions.forEach(data=>{
+//   console.log(data);
+// })
