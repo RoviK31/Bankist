@@ -62,17 +62,18 @@ const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
 const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
   movements.forEach((mov, i) => {
-    const type = mov> 0 ? 'deposit':'withdrawal'
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
     <div class="movements__row">
-    <div class="movements__type movements__type--${type}">${i+1}${type}</div>
+    <div class="movements__type movements__type--${type}">${i + 1}${type}</div>
     <div class="movements__value">${mov}</div>
   </div>
     `;
 
-    containerMovements.insertAdjacentHTML('afterbegin', html)
+    containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
 displayMovements(account1.movements);
@@ -116,3 +117,37 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(arr[arr.length -1]);
 // console.log(arr.slice(-1)[0]);
 // console.log(arr.at(-1));
+
+//Coding challenge 1
+const julia1 = [3, 5, 2, 12, 7];
+const kate1 = [4, 1, 15, 8, 3];
+
+const julia2 = [9, 16, 6, 8, 3];
+const kate2 = [10, 5, 6, 1, 4];
+//1.
+const juliaCorrect = julia1.slice().splice(1,3)
+console.log(juliaCorrect);
+//2. 
+const allData = juliaCorrect.concat(kate1)
+console.log(allData);
+
+//3.
+allData.forEach((data,i)=>{
+  if(data >= 3){
+    console.log(`Dog number ${i+1} is an adult, and is ${data} years old`);
+  }else{
+    console.log(`Dog number ${i+1} is still a puppy `);
+  }
+
+
+
+
+})
+//4
+juliaCorrect.forEach(data=>{
+  console.log("julia",data);
+})
+
+kate2.forEach(data=>{
+  console.log("kate0",data);
+})
