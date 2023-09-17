@@ -69,7 +69,7 @@ const displayMovements = function (movements) {
     const html = `
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1}${type}</div>
-    <div class="movements__value">${mov}</div>
+    <div class="movements__value">${mov}€</div>
   </div>
     `;
 
@@ -78,25 +78,45 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
-const calcPrintBalance = function(movements){
-  const balance = movements.reduce((acc,mov)=> acc + mov,0)
-  labelBalance.textContent = `${balance} EUR`
-}
-calcPrintBalance(account1.movements)
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} €`;
+};
+calcPrintBalance(account1.movements);
 
-const createUsername = function (accs) {
-  accs.forEach(function(acc){
-    acc.username = acc.owner
-    .toLowerCase()
-    .split(' ')
-    .map(name => name[0])
-    .join('');
-  })
+const clacDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter(mov => mov > 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumIn.textContent = `${incomes}€`;
 
+  const out = movements
+    .filter(mov => mov < 0)
+    .reduce((acc, cur) => acc + cur, 0);
+  labelSumOut.textContent = `${Math.abs(out)}€`;
+
+  const interest = movements
+    .filter(mov => mov > 0)
+    .map(deposit => (deposit * 1.2) / 100)
+    .filter((int,i,arr)=>{
+      return int >= 1})
+    .reduce((acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`
 };
 
+clacDisplaySummary(account1.movements);
 
-createUsername(accounts)
+const createUsername = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('');
+  });
+};
+
+createUsername(accounts);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -179,7 +199,6 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   console.log(data);
 // })
 
-
 // filter return an array base on the condition
 // const deposit = movements.filter(mov=> mov > 0)
 // const withdrawal = movements.filter(mov=> mov < 0)
@@ -212,7 +231,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //       }
 //     })
 //     console.log(humanAge);
-//   const Dog = humanAge.filter(dog => dog >= 18)  
+//   const Dog = humanAge.filter(dog => dog >= 18)
 //   console.log(Dog);
 //   const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
 //     return  acc + cur / Dog.length
@@ -222,3 +241,9 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
 // console.log(ave1);
+const eurToUsd = 1.1;
+const totalDepositsUSD = movements
+  .filter(mov => mov > 0)
+  .map(mov => mov * eurToUsd)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(totalDepositsUSD);
