@@ -195,10 +195,30 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(balance);
 
 // Maximum value
-const max = movements.reduce((acc,mov)=>{
-  if ( acc > mov){
-    return acc
-  }else{
-    return mov
-  }
-}, movements[0])
+// const max = movements.reduce((acc,mov)=>{
+//   if ( acc > mov){
+//     return acc
+//   }else{
+//     return mov
+//   }
+// }, movements[0])
+
+// const calcAverageHumanAge = function(arr){
+//  const  humanAge = arr.map(dog => {
+//       if(dog <=2){
+//         return 2 * dog
+//       }else{
+//         return 16 + dog * 4
+//       }
+//     })
+//     console.log(humanAge);
+//   const Dog = humanAge.filter(dog => dog >= 18)  
+//   console.log(Dog);
+//   const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
+//     return  acc + cur / Dog.length
+//   },0)
+//   return averageHumanAge
+// }
+
+// const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
+// console.log(ave1);
