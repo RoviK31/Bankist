@@ -98,10 +98,11 @@ const clacDisplaySummary = function (movements) {
   const interest = movements
     .filter(mov => mov > 0)
     .map(deposit => (deposit * 1.2) / 100)
-    .filter((int,i,arr)=>{
-      return int >= 1})
+    .filter((int, i, arr) => {
+      return int >= 1;
+    })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest}€`
+  labelSumInterest.textContent = `${interest}€`;
 };
 
 clacDisplaySummary(account1.movements);
@@ -222,28 +223,39 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   }
 // }, movements[0])
 
-// const calcAverageHumanAge = function(arr){
-//  const  humanAge = arr.map(dog => {
-//       if(dog <=2){
-//         return 2 * dog
-//       }else{
-//         return 16 + dog * 4
-//       }
-//     })
-//     console.log(humanAge);
-//   const Dog = humanAge.filter(dog => dog >= 18)
-//   console.log(Dog);
-//   const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
-//     return  acc + cur / Dog.length
-//   },0)
-//   return averageHumanAge
-// }
+const calcAverageHumanAge = function(arr){
+ const  humanAge = arr.map(dog => {
+      if(dog <=2){
+        return 2 * dog
+      }else{
+        return 16 + dog * 4
+      }
+    })
+  const Dog = humanAge.filter(dog => dog >= 18)
+  
+  const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
+    return  acc + cur / Dog.length
+  },0)
+  return averageHumanAge
+}
 
-// const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
-// console.log(ave1);
-const eurToUsd = 1.1;
-const totalDepositsUSD = movements
-  .filter(mov => mov > 0)
-  .map(mov => mov * eurToUsd)
-  .reduce((acc, mov) => acc + mov, 0);
-console.log(totalDepositsUSD);
+const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
+console.log(ave1);
+// const eurToUsd = 1.1;
+// const totalDepositsUSD = movements
+//   .filter(mov => mov > 0)
+//   .map(mov => mov * eurToUsd)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(totalDepositsUSD);
+
+const calcAverageHumanAge2 = arr => {
+  const averageHumanAge = arr.map(dogAge =>
+    dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4
+  ).filter(dogAge => dogAge >= 18).reduce((acc,cur,i,arr)=>{
+    return acc + cur / arr.length
+  },0)
+  return averageHumanAge
+};
+
+const ave2 = calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]);
+console.log(ave2);
