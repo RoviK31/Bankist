@@ -76,13 +76,11 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
-displayMovements(account1.movements);
 
 const calcPrintBalance = function (movements) {
   const balance = movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${balance} €`;
 };
-calcPrintBalance(account1.movements);
 
 const clacDisplaySummary = function (movements) {
   const incomes = movements
@@ -105,8 +103,6 @@ const clacDisplaySummary = function (movements) {
   labelSumInterest.textContent = `${interest}€`;
 };
 
-clacDisplaySummary(account1.movements);
-
 const createUsername = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -118,6 +114,29 @@ const createUsername = function (accs) {
 };
 
 createUsername(accounts);
+
+// Event handler
+let currentAccount;
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  currentAccount = accounts.find(
+    acc => acc.username === inputLoginUsername.value
+  );
+
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    //Display UI and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    containerApp.style.opacity = 100;
+  }
+
+  displayMovements(currentAccount.movements);
+  calcPrintBalance(currentAccount.movements);
+  clacDisplaySummary(currentAccount.movements);
+});
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -207,7 +226,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // console.log(deposit);
 
 // console.log(movements);
-// // * accumulator -> SNOWBAL
+//  * accumulator -> SNOWBAL
 // const balance = movements.reduce(function(acc,cur,i,arr){
 //   console.log(`Iteration ${i}: ${acc}`);
 //   return acc +cur
@@ -223,39 +242,45 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   }
 // }, movements[0])
 
-const calcAverageHumanAge = function(arr){
- const  humanAge = arr.map(dog => {
-      if(dog <=2){
-        return 2 * dog
-      }else{
-        return 16 + dog * 4
-      }
-    })
-  const Dog = humanAge.filter(dog => dog >= 18)
-  
-  const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
-    return  acc + cur / Dog.length
-  },0)
-  return averageHumanAge
-}
+// const calcAverageHumanAge = function(arr){
+//  const  humanAge = arr.map(dog => {
+//       if(dog <=2){
+//         return 2 * dog
+//       }else{
+//         return 16 + dog * 4
+//       }
+//     })
+//   const Dog = humanAge.filter(dog => dog >= 18)
 
-const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
-console.log(ave1);
-// const eurToUsd = 1.1;
-// const totalDepositsUSD = movements
-//   .filter(mov => mov > 0)
-//   .map(mov => mov * eurToUsd)
-//   .reduce((acc, mov) => acc + mov, 0);
-// console.log(totalDepositsUSD);
+//   const averageHumanAge = Dog.reduce((acc,cur,i,arr)=>{
+//     return  acc + cur / Dog.length
+//   },0)
+//   return averageHumanAge
+// }
 
-const calcAverageHumanAge2 = arr => {
-  const averageHumanAge = arr.map(dogAge =>
-    dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4
-  ).filter(dogAge => dogAge >= 18).reduce((acc,cur,i,arr)=>{
-    return acc + cur / arr.length
-  },0)
-  return averageHumanAge
-};
+// const ave1 = calcAverageHumanAge([5,2,4,1,15,8,3])
+// console.log(ave1);
+// // const eurToUsd = 1.1;
+// // const totalDepositsUSD = movements
+// //   .filter(mov => mov > 0)
+// //   .map(mov => mov * eurToUsd)
+// //   .reduce((acc, mov) => acc + mov, 0);
+// // console.log(totalDepositsUSD);
 
-const ave2 = calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]);
-console.log(ave2);
+// const calcAverageHumanAge2 = arr => {
+//   const averageHumanAge = arr.map(dogAge =>
+//     dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4
+//   ).filter(dogAge => dogAge >= 18).reduce((acc,cur,i,arr)=> acc + cur / arr.length
+//   ,0)
+//   return averageHumanAge
+// };
+
+// const ave2 = calcAverageHumanAge2([5, 2, 4, 1, 15, 8, 3]);
+// console.log(ave2);
+
+// ! find method retrieves an element in the array, requires a call back that is a boolean
+// const firstWithdrawal = movements.find(mov=> mov <0)
+// console.log(firstWithdrawal);
+
+// const account = accounts.find(acc => acc.owner === 'Jessica Davis')
+// console.log(account);
