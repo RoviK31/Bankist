@@ -78,6 +78,12 @@ const displayMovements = function (movements) {
 };
 displayMovements(account1.movements);
 
+const calcPrintBalance = function(movements){
+  const balance = movements.reduce((acc,mov)=> acc + mov,0)
+  labelBalance.textContent = `${balance} EUR`
+}
+calcPrintBalance(account1.movements)
+
 const createUsername = function (accs) {
   accs.forEach(function(acc){
     acc.username = acc.owner
@@ -91,7 +97,6 @@ const createUsername = function (accs) {
 
 
 createUsername(accounts)
-
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -173,3 +178,18 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // movementsDescriptions.forEach(data=>{
 //   console.log(data);
 // })
+
+
+// filter return an array base on the condition
+// const deposit = movements.filter(mov=> mov > 0)
+// const withdrawal = movements.filter(mov=> mov < 0)
+// console.log(withdrawal);
+// console.log(deposit);
+
+// console.log(movements);
+// // * accumulator -> SNOWBAL
+// const balance = movements.reduce(function(acc,cur,i,arr){
+//   console.log(`Iteration ${i}: ${acc}`);
+//   return acc +cur
+// }, 0)
+// console.log(balance);
