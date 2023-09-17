@@ -82,20 +82,20 @@ const calcPrintBalance = function (movements) {
   labelBalance.textContent = `${balance} €`;
 };
 
-const clacDisplaySummary = function (movements) {
-  const incomes = movements
+const clacDisplaySummary = function (acc) {
+  const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, cur) => acc + cur, 0);
   labelSumIn.textContent = `${incomes}€`;
 
-  const out = movements
+  const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, cur) => acc + cur, 0);
   labelSumOut.textContent = `${Math.abs(out)}€`;
 
-  const interest = movements
+  const interest = acc.movements
     .filter(mov => mov > 0)
-    .map(deposit => (deposit * 1.2) / 100)
+    .map(deposit => (deposit * acc.interestRate) / 100)
     .filter((int, i, arr) => {
       return int >= 1;
     })
@@ -131,10 +131,13 @@ btnLogin.addEventListener('click', function (e) {
     }`;
     containerApp.style.opacity = 100;
   }
+  //Clear input fields
+  inputLoginUsername.value = inputLoginPin.value = "";
+  inputLoginPin.blur()
 
   displayMovements(currentAccount.movements);
   calcPrintBalance(currentAccount.movements);
-  clacDisplaySummary(currentAccount.movements);
+  clacDisplaySummary(currentAccount);
 });
 
 /////////////////////////////////////////////////
