@@ -115,11 +115,11 @@ const createUsername = function (accs) {
 
 createUsername(accounts);
 
-const updateUI = function(acc){
+const updateUI = function (acc) {
   displayMovements(acc.movements);
   calcPrintBalance(acc);
   clacDisplaySummary(acc);
-}
+};
 
 // Event handler
 let currentAccount;
@@ -142,7 +142,7 @@ btnLogin.addEventListener('click', function (e) {
   inputLoginUsername.value = inputLoginPin.value = '';
   inputLoginPin.blur();
 
-  updateUI(currentAccount)
+  updateUI(currentAccount);
 });
 
 btnTransfer.addEventListener('click', function (e) {
@@ -152,7 +152,7 @@ btnTransfer.addEventListener('click', function (e) {
     acc => acc.username === inputTransferTo.value
   );
 
-  inputTransferAmount.value = inputTransferTo.value = ''
+  inputTransferAmount.value = inputTransferTo.value = '';
 
   if (
     amount > 0 &&
@@ -160,46 +160,46 @@ btnTransfer.addEventListener('click', function (e) {
     currentAccount.balance >= amount &&
     receiverAcc?.username !== currentAccount.username
   ) {
-    currentAccount.movements.push(-amount)
-    receiverAcc.movements.push(amount)
-    updateUI(currentAccount)
+    currentAccount.movements.push(-amount);
+    receiverAcc.movements.push(amount);
+    updateUI(currentAccount);
   }
-
-
 });
 
-btnLoan.addEventListener('click', function(e){
+btnLoan.addEventListener('click', function (e) {
   e.preventDefault();
 
-  const amount = Number(inputLoanAmount.value)
+  const amount = Number(inputLoanAmount.value);
 
-  if(amount>0 && currentAccount.movements.some(mov => mov >= amount * 0.1)){
-    // add movement 
-    currentAccount.movements.push(amount)
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // add movement
+    currentAccount.movements.push(amount);
 
-
-    updateUI(currentAccount)
+    updateUI(currentAccount);
   }
 
-  inputLoanAmount.value = ''
-})
+  inputLoanAmount.value = '';
+});
 
-btnClose.addEventListener('click', function(e){
-  e.preventDefault()
-  
-  
+btnClose.addEventListener('click', function (e) {
+  e.preventDefault();
 
-  if( currentAccount.username === inputCloseUsername.value && currentAccount.pin === Number(inputClosePin.value) ){
-      const index = accounts.findIndex(acc => acc.username === currentAccount.username)
-      // Delete account;
-      accounts.splice(index, 1)
+  if (
+    currentAccount.username === inputCloseUsername.value &&
+    currentAccount.pin === Number(inputClosePin.value)
+  ) {
+    const index = accounts.findIndex(
+      acc => acc.username === currentAccount.username
+    );
+    // Delete account;
+    accounts.splice(index, 1);
 
-      // Hide UI
-      containerApp.style.opacity = 0
+    // Hide UI
+    containerApp.style.opacity = 0;
   }
 
-  inputCloseUsername.value = inputClosePin.value = ''
-})
+  inputCloseUsername.value = inputClosePin.value = '';
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -349,15 +349,14 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // const account = accounts.find(acc => acc.owner === 'Jessica Davis')
 // console.log(account);
 
-
 // Equality
 // console.log(movements.includes(-130));
 
 // * some : Condition return a boolean if the some of the values of a the array is true
-const anyDeposits = movements.some(mov => mov > 0 )
+const anyDeposits = movements.some(mov => mov > 0);
 // console.log(anyDeposits);
 
-// * every : if every value in the array satisfy the condition then it will return true 
+// * every : if every value in the array satisfy the condition then it will return true
 // console.log(movements.every(mov => mov > 0));
 
 // Separate callback
@@ -365,3 +364,29 @@ const anyDeposits = movements.some(mov => mov > 0 )
 // console.log(movements.some(deposit));
 // console.log(movements.every(deposit));
 // console.log(movements.filter(deposit));
+
+// flat method
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// const accountMovements = accounts.map(acc => acc.movements)
+// console.log(accountMovements);
+// const allMovements = accountMovements.flat()
+// console.log(allMovements);
+// const overalBalance = allMovements.reduce((acc,mov)=> acc+mov,0)
+// console.log(overalBalance);
+//flat
+// const overalBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance);
+
+// //flatMap
+// const overalBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+// console.log(overalBalance2);
