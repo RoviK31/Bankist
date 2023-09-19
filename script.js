@@ -402,12 +402,12 @@ const anyDeposits = movements.some(mov => mov > 0);
 // console.log(overalBalance2);
 
 // * Sort method using strings
-const owners = ['jonas', 'Zach', 'Adam', 'Martha'];
-console.log(owners.sort());
-console.log(owners);
+// const owners = ['jonas', 'Zach', 'Adam', 'Martha'];
+// console.log(owners.sort());
+// console.log(owners);
 
 //Numbers
-console.log(movements);
+// console.log(movements);
 // * return < 0, A, B (keep order)
 // * return > 0  B, A (switch order)
 
@@ -422,8 +422,8 @@ console.log(movements);
 
 // });
 
-movements.sort((a, b) => a-b);
-console.log(movements);
+// movements.sort((a, b) => a-b);
+// console.log(movements);
 //Descending
 // movements.sort((a, b) => {
 //   if(a>b){
@@ -434,5 +434,11 @@ console.log(movements);
 //   }
   
 // });
-movements.sort((a, b)=> b - a)
-console.log(movements);
+// movements.sort((a, b)=> b - a)
+// console.log(movements);
+
+labelBalance.addEventListener('click', function(){
+  const movementsUI = Array.from(document.querySelectorAll('.movements__value'))
+
+  console.log(movementsUI.map(el => Number(el.textContent.replace('€',""))));
+})
